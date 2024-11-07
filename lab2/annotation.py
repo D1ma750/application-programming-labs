@@ -1,7 +1,8 @@
 import csv
 import os
 
-def create_annotation(imgdir: str, file_with_annotation: str):
+
+def create_annotation(imgdir: str, file_with_annotation: str) -> None:
     """
     Creates annotation with absolute and relative paths to images
     :param imgdir: Directory with images

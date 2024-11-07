@@ -1,7 +1,9 @@
 import os
+
 from icrawler.builtin import BingImageCrawler
 
-def download_images(keyword: str, number_of_images: int, imgdir: str):
+
+def download_images(keyword: str, number_of_images: int, imgdir: str) -> None:
     """
     Download images in special directory
     :param keyword: word for searching

@@ -1,6 +1,8 @@
 import csv
+
+
 class ImageIterator:
-    def __init__(self, file_with_annotation:str):
+    def __init__(self, file_with_annotation: str):
         self.images = []
         with open(file_with_annotation, 'r') as csv_file:
             reader = csv.DictReader(csv_file)
