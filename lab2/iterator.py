@@ -1,3 +1,4 @@
+import csv
 class ImageIterator:
     def __init__(self, file_with_annotation:str):
         self.images = []
