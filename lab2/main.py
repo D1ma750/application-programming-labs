@@ -70,7 +70,7 @@ def create_annotation(imgdir: str, file_with_annotation: str):
 def main():
     arguments = parsing_arguments()
     try:
-        #download_images(arguments.keyword, arguments.number_of_images, arguments.imgdir)
+        download_images(arguments.keyword, arguments.number_of_images, arguments.imgdir)
         create_annotation(arguments.imgdir,arguments.file_with_annotation)
         my_iterator = ImageIterator(arguments.file_with_annotation)
         for image in my_iterator :
