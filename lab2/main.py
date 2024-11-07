@@ -32,37 +32,32 @@ def parsing_arguments():
     return arguments
 
 class ImageIterator:
-    def __init__(self, csv_path: str) -> None:
-        self.csv_path = csv_path
-        self.path_list = self.__load_csv()
-        self.limit = len(self.path_list)  # ограничение
-        self.counter = 0  # счётчик
+    def init(self, annotation_file):
+        self.images = []
+        with open(annotation_file, 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                self.images.append(row['absolute_path'])
+        self.index = 0
 
-    def __iter__(self) -> 'ImageIterator':
+    def iter(self):
         return self
 
-    def __next__(self) -> str:
-        if self.counter < self.limit:
-            next_element = self.path_list[self.counter]
-            self.counter += 1
-            return next_element
+    def next(self):
+        if self.index < len(self.images):
+            image_path = self.images[self.index]
+            self.index += 1
+            return image_path
         else:
             raise StopIteration
 
-    def __load_csv(self) -> list:
-        with open(self.csv_path, mode='r', encoding='utf-8') as csv_file:
-            reader = csv.reader(csv_file)
-            next(reader)  # пропускаем заголовок
-            path_list = list(row[1] for row in reader)
-            return path_list
-
-def create_annotation(imgdir: str, csv_path: str):
+def create_annotation(imgdir: str, file_with_annotation: str):
     """
     Creates annotation with absolute and relative paths to images
     :param imgdir: Directory with images
-    :param csv_path: .csv file for annotation
+    :param file_with_annotation: .csv file for annotation
     """
-    with open(csv_path, mode='w', encoding='utf-8') as file_with_annotation:
+    with open(file_with_annotation, mode='w', encoding='utf-8') as file_with_annotation:
         writer = csv.writer(file_with_annotation)
         headers = ['Relative path', 'Absolute path']
         writer.writerow(headers)
@@ -75,10 +70,10 @@ def create_annotation(imgdir: str, csv_path: str):
 def main():
     arguments = parsing_arguments()
     try:
-        download_images(arguments.keyword, arguments.number_of_images, arguments.imgdir)
-        create_annotation(arguments.imgdir,arguments.file_with_annotation)
+        #download_images(arguments.keyword, arguments.number_of_images, arguments.imgdir)
+        #create_annotation(arguments.imgdir,arguments.file_with_annotation)
         my_iterator = ImageIterator(arguments.file_with_annotation)
-        for image in my_iterator:
+        for image in my_iterator :
             print(image)
     except Exception as e:
         print(f"Error: {e} ")
