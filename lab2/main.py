@@ -32,18 +32,18 @@ def parsing_arguments():
     return arguments
 
 class ImageIterator:
-    def init(self, annotation_file):
+    def __init__(self, file_with_annotation:str):
         self.images = []
-        with open(annotation_file, 'r') as csvfile:
-            reader = csv.DictReader(csvfile)
+        with open(file_with_annotation, 'r') as csv_file:
+            reader = csv.DictReader(csv_file)
             for row in reader:
-                self.images.append(row['absolute_path'])
+                self.images.append(row['Absolute path'])
         self.index = 0
 
-    def iter(self):
+    def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         if self.index < len(self.images):
             image_path = self.images[self.index]
             self.index += 1
@@ -71,7 +71,7 @@ def main():
     arguments = parsing_arguments()
     try:
         #download_images(arguments.keyword, arguments.number_of_images, arguments.imgdir)
-        #create_annotation(arguments.imgdir,arguments.file_with_annotation)
+        create_annotation(arguments.imgdir,arguments.file_with_annotation)
         my_iterator = ImageIterator(arguments.file_with_annotation)
         for image in my_iterator :
             print(image)
