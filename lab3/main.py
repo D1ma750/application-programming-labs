@@ -1,7 +1,7 @@
 import cv2
 import argparse
 
-from work_with_images import colors_of_histogram, creating_histogram, changing_image_size, show_image
+from work_with_image import colors_of_histogram, creating_histogram, changing_image_size, show_image
 
 
 def parsing_arguments():
