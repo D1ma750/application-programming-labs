@@ -3,11 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def open_image(image_path: str)-> np.ndarray:
-    image=cv2.imread('image_path')
-    return image
-
-
 def colors_of_histogram(image:np.ndarray)->tuple:
     blue = cv2.calcHist([image], [0], None, [256], [0, 255])
     green = cv2.calcHist([image], [1], None, [256], [0, 255])
