@@ -20,6 +20,7 @@ def main():
         blue, green, red= colors_of_histogram(image)
         creating_histogram(blue, green, red)
         new_image=changing_image_size(image, arguments.width, arguments.height)
+        print(new_image.shape)
         show_image(image, new_image)
         cv2.imwrite(arguments.new_image_path, new_image)
 
