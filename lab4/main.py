@@ -1,7 +1,4 @@
 import argparse
-import pandas as pd
-import cv2
-import matplotlib.pyplot as plt
 
 from dataframe import create_df, add_hwd_columns, create_histogram, create_column_area, sort_columns, sort_area
 
@@ -12,8 +9,7 @@ def parsing_arguments():
     :return: Arguments
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("path_csv", type=str, help="Path to csv file")
-    #parser.add_argument("path", type=str, help="Path to image dir")
+    parser.add_argument("path_csv", type = str, help="Path to csv file")
     arguments = parser.parse_args()
     return arguments
 

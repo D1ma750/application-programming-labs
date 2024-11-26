@@ -10,7 +10,6 @@ def create_df(path_csv: str) -> pd.DataFrame:
     :return: DataFrame
     """
     df = pd.read_csv(path_csv)
-    df.columns=['Abspath', 'Relpath']
     return df
 
 
@@ -25,7 +24,7 @@ def add_hwd_columns(df: pd.DataFrame) -> pd.DataFrame:
     heights = []
     widths = []
     depths = []
-    for abspath in df["Abspath"]:
+    for abspath in df["Absolute_path"]:
         img = cv2.imread(abspath)
         height, width, depth = img.shape
         heights.append(height)
@@ -41,9 +40,9 @@ def sort_columns(df: pd.DataFrame, max_height: int, max_width: int) -> pd.DataFr
     """
     Функция фильтрации изображений
     :param df:
-    :param max_width: width filter
-    :param max_height: height filter
-    :return: pandas DataFrame (object)
+    :param max_width: фильтр по ширине
+    :param max_height: фильтр по высоте
+    :return: Отсортированный DataFrame
     """
     return df[(df['Height'] <= max_height) & (df['Width'] <= max_width)]
 
@@ -51,7 +50,7 @@ def sort_columns(df: pd.DataFrame, max_height: int, max_width: int) -> pd.DataFr
 def create_column_area(df: pd.DataFrame) -> None:
     """
     Функция добавления столбца area
-    :param df: pandas DataFrame (object)
+    :param df: DataFrame
     :return: None
     """
     df['Area'] = df['Height'] * df['Width']
@@ -59,7 +58,7 @@ def create_column_area(df: pd.DataFrame) -> None:
 
 def create_histogram(df: pd.DataFrame) -> None:
     plt.figure(figsize=(10, 6))
-    plt.hist(df['Area'], bins=10, edgecolor='black')
+    plt.hist(df['Area'], bins=30, edgecolor='black')
     plt.title('Распределение площадей изображений')
     plt.xlabel('Площадь изображения')
     plt.ylabel('Количество изображений')
