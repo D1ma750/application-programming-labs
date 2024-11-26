@@ -1,5 +1,5 @@
-import pandas as pd
 import cv2
+import pandas as pd
 import matplotlib.pyplot as plt
 
 
@@ -21,9 +21,7 @@ def add_hwd_columns(df: pd.DataFrame) -> pd.DataFrame:
     :param df: Исходный DataFrame, содержащий путь к изображению в колонке 'Relpath'.
     :return: Обновленный DataFrame с новыми столбцами.
     """
-    heights = []
-    widths = []
-    depths = []
+    heights, widths, depths = [], [], []
     for abspath in df["Absolute_path"]:
         img = cv2.imread(abspath)
         height, width, depth = img.shape
@@ -36,7 +34,7 @@ def add_hwd_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def sort_columns(df: pd.DataFrame, max_height: int, max_width: int) -> pd.DataFrame:
+def filter_columns(df: pd.DataFrame, max_height: int, max_width: int) -> pd.DataFrame:
     """
     Функция фильтрации изображений
     :param df:
@@ -66,5 +64,5 @@ def create_histogram(df: pd.DataFrame) -> None:
     plt.show()
 
 
-def sort_area(df: pd.DataFrame) -> pd.DataFrame:
-    return df.sort_values(by='Area')
+def sort_by_area(df: pd.DataFrame) -> pd.DataFrame:
+    return df.sort_values(by='Area', ascending=False)
