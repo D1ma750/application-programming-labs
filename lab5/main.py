@@ -1,9 +1,10 @@
 import sys
-from iterator import ImageIterator
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QFileDialog, QVBoxLayout, QWidget
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
+
+from iterator import ImageIterator
 
 
 class MainWindow(QMainWindow):
