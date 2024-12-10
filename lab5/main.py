@@ -11,6 +11,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("by Лысый")
         self.setFixedSize(1280, 720)
+
         self.image_label = QLabel(self)
         self.image_label.resize(1280, 600)
         self.image_label.setAlignment(Qt.AlignCenter)
